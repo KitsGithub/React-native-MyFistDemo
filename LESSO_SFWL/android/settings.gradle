@@ -1,0 +1,3 @@
+rootProject.name = 'LESSO_SFWL'
+
+include ':app'
