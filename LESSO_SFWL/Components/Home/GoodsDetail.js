@@ -5,8 +5,14 @@ import {
 	Text,
 } from 'react-native';
 
+
+
 import Networking from '../../Public/Networking'
 var goodsDetailURL = 'Goods/GetGoodsDetails';
+
+
+import NavigationBar from '../../Public/NavBarCommon'
+import GoodsDetailView from './Compoents/goodsDetailView'
 
 export default class GoodsDetail extends Component {
 
@@ -15,7 +21,9 @@ export default class GoodsDetail extends Component {
 
 		this.state = ({
 			guid: null,
+			goodsDetail:null,
 		})
+
 	}
 
 
@@ -30,12 +38,35 @@ export default class GoodsDetail extends Component {
 	}
 
 
+	backAction(){
+		this.props.navigator.pop()
+	}
+
+	getGoodsPress(guid) {
+		alert('接单' + guid)
+
+	}
+
+
 	render() {
-		return (
-			<View style={style.container}>
-				<Text>{this.props.guid}</Text>
-			</View>
-		)
+		if (this.state.goodsDetail) {
+			return (
+				<View style={{flex:1}}>
+					<NavigationBar title={'货源详情'}
+												 leftImage={require('../../SFIcon/Nav_Back.png')}
+												 leftAction={()=>this.backAction()}
+					/>
+					<GoodsDetailView goodsDetail={this.state.goodsDetail} getGoodsPress={(guid)=>this.getGoodsPress(guid)}/>
+				</View>
+			)
+		}
+		else  {
+			return (
+				<View style={style.container}>
+					<Text>{this.props.guid}</Text>
+				</View>
+			)
+		}
 	}
 
 
@@ -44,6 +75,12 @@ export default class GoodsDetail extends Component {
 			Guid:this.props.guid,
 		}),(response)=>{
 
+			if (response.Code === 0) {
+
+				this.setState({
+					goodsDetail:response.Data,
+				})
+			}
 
 		})
 	}
@@ -53,6 +90,6 @@ export default class GoodsDetail extends Component {
 const style = StyleSheet.create({
 	container:{
 		flex:1,
-		backgroundColor:'yellow',
+		backgroundColor:'white',
 	}
 });

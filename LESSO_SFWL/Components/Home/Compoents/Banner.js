@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import '../../../Public/PublicResouce'
+import NavBar from '../../../Public/NavBarCommon'
 
 var ScreenWidth = require('Dimensions').get('window').width;
 var BannerHeight = 171;
@@ -135,7 +136,7 @@ const styles = StyleSheet.create({
 	},
 	container:{
 		width:global.SCREEN.width,
-		height: 170,
+		height: BannerHeight,
 	},
 	pageViewStyle:{
 		width: ScreenWidth,

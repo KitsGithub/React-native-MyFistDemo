@@ -11,6 +11,7 @@ import '../../Public/PublicResouce'
 import Networking from '../../Public/Networking'
 import GoodsDetail from './GoodsDetail'
 
+
 //添加banner组件
 import BannerView from './Compoents/Banner'
 //添加homeCell组件
@@ -38,12 +39,14 @@ export default class Home extends Component<Props> {
 	render() {
 		if (this.state.dataSource) {
 			return (
-				<ListView
-					dataSource={this.state.dataSource}
-					renderRow={(rowData)=>this.renderRowView(rowData)}
-					renderHeader={()=> {return <BannerView/>}}
-					renderFooter={()=> {return(<View style={{height:49,width:global.SCREEN.width}}></View>)}}
-				/>
+				<View>
+					<ListView
+						dataSource={this.state.dataSource}
+						renderRow={(rowData)=>this.renderRowView(rowData)}
+						renderHeader={()=> {return <BannerView/>}}
+						renderFooter={()=> {return(<View style={{height:49,width:global.SCREEN.width}}></View>)}}
+					/>
+				</View>
 			);
 		} else  {
 			return <View style={styles.container}></View>
@@ -63,7 +66,7 @@ export default class Home extends Component<Props> {
 					}
 				})
 			}}>
-				{HomeCell.goodsCell(rowData)}
+				<HomeCell rowData={rowData}/>
 			</TouchableOpacity>
 		)
 	}

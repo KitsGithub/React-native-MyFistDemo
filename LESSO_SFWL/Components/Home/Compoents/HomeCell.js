@@ -16,39 +16,41 @@ export default class HomeCell extends Component {
 		super(props);
 	}
 
-	/*公开方法*/
-	static goodsCell(rowData) {
+
+	render() {
+		const {rowData} = this.props;
 		return (
-				<View style={cellStyle.cellContainerView}>
-					<View style={cellStyle.addressContainer}>
-						<View style={cellStyle.fromAddress}>
-							<Text style={{fontSize:16,color:'#3d3d3d'}}>{rowData.from_province + '-' + rowData.from_city + '-' + rowData.from_district}</Text>
-						</View>
-						<View style={cellStyle.toAddress}>
-							<Text style={{fontSize:16,color:'#3d3d3d'}}>{rowData.to_province + '-' + rowData.to_city + '-' + rowData.to_district}</Text>
-						</View>
+			<View style={cellStyle.cellContainerView}>
+				<View style={cellStyle.addressContainer}>
+					<View style={cellStyle.fromAddress}>
+						<Text style={{fontSize:16,color:'#3d3d3d',fontWeight:'600'}}>{rowData.from_province + '-' + rowData.from_city + '-' + rowData.from_district}</Text>
 					</View>
-					<View style={cellStyle.detailContainer}>
-						<Image style={cellStyle.imageStyle} source={{uri: global.BaseSourceURL + rowData.head_src}}/>
-						<View style={cellStyle.detailRight}>
-							<View style={{flex:1,flexDirection:'row'}}>
-								<Text style={cellStyle.goodsName}>{rowData.goods_name + ' '+ rowData.goods_weight + '吨 '}</Text>
-								<Text style={cellStyle.textSeport}>|</Text>
-								<Text style={cellStyle.goodsName}>{' ' + rowData.car_type + ' ' + rowData.car_long + ' '+ rowData.car_count + '辆'}</Text>
-							</View>
-							<View style={{flex:1,marginBottom:10,flexDirection:'row'}}>
-								<Text style={cellStyle.identifier}>已认证</Text>
-								<Text style={[cellStyle.userName,{fontSize:12, color:'#999999'}]} numberOfLines={0}>{rowData.delivery_by}</Text>
-								<Text style={[cellStyle.userName,{fontSize:12, color:'#999999'}]}>{'发货: '+rowData.issueCount+'次'}</Text>
-							</View>
-						</View>
-						<View style={cellStyle.getOrder}>
-							<Text style={{fontSize:14, color:'#3d3d3d'}}>接单</Text>
-						</View>
+					<View style={cellStyle.toAddress}>
+						<Text style={{fontSize:16,color:'#3d3d3d',fontWeight:'600'}}>{rowData.to_province + '-' + rowData.to_city + '-' + rowData.to_district}</Text>
 					</View>
-					<View style={cellStyle.bottomContainer}></View>
 				</View>
+				<View style={cellStyle.detailContainer}>
+					<Image style={cellStyle.imageStyle} source={{uri: global.BaseSourceURL + rowData.head_src}}/>
+					<View style={cellStyle.detailRight}>
+						<View style={{flex:1,flexDirection:'row'}}>
+							<Text style={cellStyle.goodsName}>{rowData.goods_name + ' '+ rowData.goods_weight + '吨 '}</Text>
+							<Text style={cellStyle.textSeport}>|</Text>
+							<Text style={cellStyle.goodsName}>{' ' + rowData.car_type + ' ' + rowData.car_long + ' '+ rowData.car_count + '辆'}</Text>
+						</View>
+						<View style={{flex:1,marginBottom:10,flexDirection:'row'}}>
+							<Text style={cellStyle.identifier}>已认证</Text>
+							<Text style={[cellStyle.userName,{fontSize:12, color:'#999999'}]} numberOfLines={0}>{rowData.name}</Text>
+							<Text style={[cellStyle.userName,{fontSize:12, color:'#999999'}]}>{'发货: '+rowData.issueCount+'次'}</Text>
+						</View>
+					</View>
+					<View style={cellStyle.getOrder}>
+						<Text style={{fontSize:14, color:'#3d3d3d'}}>接单</Text>
+					</View>
+				</View>
+				<View style={cellStyle.bottomContainer}></View>
+			</View>
 		)
+
 	}
 
 

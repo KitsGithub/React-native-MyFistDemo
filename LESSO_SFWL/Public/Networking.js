@@ -42,7 +42,11 @@ export default class Networking extends Component {
 			console.log('++++ 接口：' + url + '\n++++ 请求参数\n' + params);
 			console.log(response)
 			//判断接口规范
-			responseCallBack(response);
+			if (response.Code === 0) {
+				responseCallBack(response);
+			} else {
+				alert(response.Error);
+			}
 		}).catch((errorMessage) => {
 			console.log(errorMessage)
 			alert('network error');
