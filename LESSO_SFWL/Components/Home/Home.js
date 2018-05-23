@@ -4,16 +4,21 @@ import {
 	View,
 	ListView,
 	TouchableOpacity,
+	Image,
+
 } from 'react-native';
 
 //添加公共库文件
 import '../../Public/PublicResouce'
 import Networking from '../../Public/Networking'
-import GoodsDetail from './GoodsDetail'
 
+//页面组件
+import GoodsDetail from './GoodsDetail'
+import PersonalCenter from './PersonalCenter'
 
 //添加banner组件
 import BannerView from './Compoents/Banner'
+import HomeNav from './Compoents/HomeNav'
 //添加homeCell组件
 import HomeCell from './Compoents/HomeCell'
 
@@ -28,7 +33,7 @@ export default class Home extends Component<Props> {
 		super(props);
 
 		this.state = ({
-			dataSource: null,
+			dataSource: new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!==r2}).cloneWithRows([]),
 		})
 	}
 
@@ -36,28 +41,36 @@ export default class Home extends Component<Props> {
 		this.requireDataSource()
 	}
 
+	_selectedUserIcon() {
+		this.props.navigator.push({
+			component:PersonalCenter,
+			title:'个人中心',
+		})
+	}
+
 	render() {
-		if (this.state.dataSource) {
-			return (
-				<View>
-					<ListView
-						dataSource={this.state.dataSource}
-						renderRow={(rowData)=>this.renderRowView(rowData)}
-						renderHeader={()=> {return <BannerView/>}}
-						renderFooter={()=> {return(<View style={{height:49,width:global.SCREEN.width}}></View>)}}
-					/>
-				</View>
-			);
-		} else  {
-			return <View style={styles.container}></View>
-		}
+		return (
+			<View>
+				<HomeNav iconSelected={()=>this._selectedUserIcon()}/>
+				<ListView
+					enableEmptySections={true}
+					automaticallyAdjustContentInsets={false}
+					dataSource={this.state.dataSource}
+					renderRow={(rowData)=>this.renderRowView(rowData)}
+					renderHeader={()=> {return <BannerView/>}}
+					renderFooter={()=> {return(<View style={{height:49,width:global.SCREEN.width}}></View>)}}
+					showsHorizontalScrollIndicator={false}
+				/>
+			</View>
+		);
 	}
 
 
 	//返回cell样式
 	renderRowView (rowData) {
 		return (
-			<TouchableOpacity onPress={()=>{
+			<TouchableOpacity activeOpacity={1}
+												onPress={()=>{
 				this.props.navigator.push({
 					component:GoodsDetail,
 					title:'货源详情',

@@ -17,6 +17,11 @@ export default class goodsDetailView extends Component {
 
 	}
 
+
+	getOrder(guid,carType) {
+		this.props.getGoodsPress(guid,carType)
+	}
+
 	render() {
 		const { goodsDetail} = this.props;
 		return (
@@ -87,7 +92,8 @@ export default class goodsDetailView extends Component {
 					<View style={{width:global.SCREEN.width,height:49}}></View>
 				</ScrollView>
 				<TouchableOpacity style={styles.getOrderView}
-													onPressOut={this.props.getGoodsPress(goodsDetail.guid)}
+													onPress={()=>this.getOrder(goodsDetail.guid,goodsDetail.car_type)}
+													activeOpacity={1}
 				>
 					<Text style={styles.getOrderText}>接单</Text>
 				</TouchableOpacity>

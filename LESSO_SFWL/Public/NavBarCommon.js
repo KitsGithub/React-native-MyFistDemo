@@ -101,14 +101,14 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	barButton: {
-		color: 'white',
-		fontSize: 18
+		color: '#3d3d3d',
+		fontSize: 16
 	},
 	bottomLine:{
 		width:require('Dimensions').get('window').width,
 		height:1,
 		backgroundColor:'#eee',
 		position:'absolute',
-		bottom:1,
+		bottom:0,
 	}
 })

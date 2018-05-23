@@ -8,6 +8,7 @@ import {
 
 
 import Networking from '../../Public/Networking'
+import SelectedCars from './Selected-cars'
 var goodsDetailURL = 'Goods/GetGoodsDetails';
 
 
@@ -43,8 +44,14 @@ export default class GoodsDetail extends Component {
 	}
 
 	getGoodsPress(guid) {
-		alert('接单' + guid)
-
+		this.props.navigator.push({
+			component:SelectedCars,
+			title:'选择接单车辆',
+			passProps:{
+				guid : guid,
+				carType : this.state.goodsDetail.car_type,
+			}
+		})
 	}
 
 
@@ -62,9 +69,7 @@ export default class GoodsDetail extends Component {
 		}
 		else  {
 			return (
-				<View style={style.container}>
-					<Text>{this.props.guid}</Text>
-				</View>
+				<View style={style.container}></View>
 			)
 		}
 	}
